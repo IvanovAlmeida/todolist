@@ -1,0 +1,17 @@
+<div class="bg-primary">
+  <nav class="navbar navbar-expand-lg bg-secondary">
+    <div class="container">
+      <a class="navbar-brand text-white" href="#" routerLink="/">
+        <i class="bi bi-check2-square brand-icon"></i>
+        TO<span>DO</span>
+      </a>
+      <a class="navlink" *ngIf="isLogin()" routerLink="/auth/register">Não possui uma conta?</a>
+      <a class="navlink" *ngIf="!isLogin()" routerLink="/auth/login">Já possui uma conta?</a>
+    </div>
+  </nav>
+  <div class="container content text-white">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, ad doloribus eligendi eveniet excepturi magni quasi qui saepe sequi unde. Aspernatur at dicta, distinctio error exercitationem harum magni vitae! Aut?
+  </div>
+</div>
+
+

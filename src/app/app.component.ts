@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo-list';
+
+  constructor(private router: Router) {
+  }
+
+  isAuthModule(): boolean {
+    const url = this.router.url ?? '';
+    return url.startsWith('/auth');
+  }
 }

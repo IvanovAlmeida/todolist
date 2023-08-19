@@ -1,0 +1,25 @@
+.bg-primary {
+  background: var(--primary, #25294C) !important;
+}
+
+.bg-secondary {
+  background: var(--secondary, #202342) !important;
+}
+
+a.navbar-brand {
+  font-weight: 600;
+}
+
+i.brand-icon,
+a.navbar-brand span,
+a.navlink {
+  color: #27C498;
+}
+
+.navbar {
+  height: 7vh;
+}
+.content {
+  min-height: 93vh;
+}
+
