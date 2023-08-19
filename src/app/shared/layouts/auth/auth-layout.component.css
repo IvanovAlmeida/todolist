@@ -14,12 +14,59 @@ i.brand-icon,
 a.navbar-brand span,
 a.navlink {
   color: #27C498;
+  text-decoration: none;
 }
 
 .navbar {
   height: 7vh;
 }
-.content {
+
+.content, .container-router {
   min-height: 93vh;
 }
 
+:host ::ng-deep .container-router app-login,
+:host ::ng-deep .container-router app-register {
+  width: 100%;
+}
+
+:host ::ng-deep app-login .content-header h2,
+:host ::ng-deep app-register .content-header h2 {
+  border-left: #27C498 7px solid;
+  padding-left: 15px;
+}
+
+:host ::ng-deep app-login input,
+:host ::ng-deep app-register input,
+:host ::ng-deep app-login input:focus,
+:host ::ng-deep app-register input:focus {
+  background: none;
+  border: 1px solid #E9ECEF;
+  border-radius: 4px;
+  color: white;
+}
+
+:host ::ng-deep app-login form button,
+:host ::ng-deep app-register form button {
+  font-weight: 700;
+  background: #27C498;
+  border: 1px solid #27C498;
+}
+
+:host ::ng-deep app-login form button:hover,
+:host ::ng-deep app-register form button:hover,
+:host ::ng-deep app-login form button:active,
+:host ::ng-deep app-register form button:active,
+:host ::ng-deep app-login form button:focus-visible,
+:host ::ng-deep app-register form button:focus-visible {
+  font-weight: 700;
+  background: #22987b !important;
+  border: 1px solid #22987b !important;
+}
+
+:host ::ng-deep app-login form button[disabled],
+:host ::ng-deep app-register form button[disabled] {
+  font-weight: 700;
+  background: #27C49880;
+  border: 1px solid #27C49880;
+}

@@ -2,6 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
+## Figma
+https://www.figma.com/file/tiCSB5k2WxOkmuZcViV0TT/TODO?type=design&node-id=41-2229&mode=design&t=rlmIhzaLTSZAzSHB-0
+
 ## Enviroments
 
 Run `ng generate environments` to create environments and update configs.
