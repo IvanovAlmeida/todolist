@@ -3,7 +3,6 @@ export const environment = {
   apiUrl: '',
 
   sessionPrefix: '',
-  authenticated: true, // temp
 
   isProduction(): boolean {
     return this.production;

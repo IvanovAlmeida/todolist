@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {AuthenticationService} from "../../../shared/services/authentication.service";
-import {AuthResponse, User, UserRegister} from "../../../shared/models/user.model";
+import {AuthResponse, UserRegister} from "../../../shared/models/user.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {matchValidator} from "../../../shared/functions/match-validator";
 import {SessionStorageUtils} from "../../../shared/utils/session-storage.utils";
-import {Route, Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
