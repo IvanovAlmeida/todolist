@@ -71,7 +71,10 @@
     </div>
   </div>
   <div class="d-grid gap-2 mt-4">
-    <button class="btn btn-primary btn-lg" type="button" [disabled]="!isValid() || loading" (click)="register()">
+    <button class="btn btn-primary btn-lg d-flex align-items-center justify-content-center" type="button" [disabled]="!isValid() || loading" (click)="register()">
+      <div class="spinner-border me-3" role="status" *ngIf="loading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
       Cadastrar-se
     </button>
   </div>
