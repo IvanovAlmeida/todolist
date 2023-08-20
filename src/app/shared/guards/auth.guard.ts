@@ -1,10 +1,10 @@
 import {CanActivateFn, Router} from '@angular/router';
-import {environment} from "../../../environments/environment";
 import {inject} from "@angular/core";
+import {SessionStorageUtils} from "../utils/session-storage.utils";
 
 export const authGuard: CanActivateFn = (route, state) => {
-
-  if(environment.authenticated) {
+  const sessionStorageUtil = new SessionStorageUtils();
+  if(sessionStorageUtil.isAuthenticated()) {
     return true;
   }
 

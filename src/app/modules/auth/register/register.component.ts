@@ -3,6 +3,8 @@ import {AuthenticationService} from "../../../shared/services/authentication.ser
 import {AuthResponse, User, UserRegister} from "../../../shared/models/user.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {matchValidator} from "../../../shared/functions/match-validator";
+import {SessionStorageUtils} from "../../../shared/utils/session-storage.utils";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -19,7 +21,9 @@ export class RegisterComponent {
   registerForm: FormGroup;
   userRegister: UserRegister;
 
-  constructor(private authService: AuthenticationService) {
+  private readonly sessionStorage = new SessionStorageUtils();
+
+  constructor(private authService: AuthenticationService, private router: Router) {
     this.userRegister = {} as UserRegister;
 
     this.registerForm = new FormGroup({
@@ -53,7 +57,10 @@ export class RegisterComponent {
 
     this.authService.register(register).subscribe({
       next: (data: AuthResponse) => {
-        console.log(data);
+        this.sessionStorage.setUserInfos(data);
+        this.router.navigateByUrl('/').then(p => {
+          console.log('navegado')
+        });
       },
       error: (err) => {
         this.loading = false;
