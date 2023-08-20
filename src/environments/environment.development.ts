@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://api.todo.maracanau.ifce.edu.br/v1',
+  apiUrl: 'https://api.todo.maracanau.ifce.edu.br',
 
   authenticated: false, // temp
 

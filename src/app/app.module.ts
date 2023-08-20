@@ -6,20 +6,28 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthLayoutComponent } from './shared/layouts/auth/auth-layout.component';
 import { AppLayoutComponent } from './shared/layouts/app-layout/app-layout.component';
-
+import {SidebarComponent} from "./shared/layouts/app-layout/subcomponents/sidebar/sidebar.component";
+import {AuthenticationService} from "./shared/services/authentication.service";
+import {CommonModule} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
-    AppLayoutComponent
+    AppLayoutComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    CommonModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
