@@ -1,16 +1,52 @@
 <div class="content-header mb-5">
   <h2>Autenticação</h2>
 </div>
-<form>
+<alert type="success" *ngIf="success">
+  <h4 class="alert-heading">Conta registrada com sucesso!</h4>
+  <p class="mb-0">
+    Em instantes você será redirecionado para a página inicial.
+  </p>
+</alert>
+<alert type="danger" *ngIf="hasErrors()">
+  <h4 class="alert-heading">Ops! :(</h4>
+  <p class="mb-1" *ngFor="let error of errors">
+    <i class="bi bi-exclamation-triangle-fill me-1"></i>
+    {{error}}
+  </p>
+</alert>
+<form [formGroup]="loginForm">
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" formControlName="email"
+           [ngClass]="getInputClassConfig('email')">
+    <div *ngIf="inputIsInvalid('email')" class="alert alert-danger mt-1 py-2">
+      <div *ngIf="inputHasError('email', 'required')">
+        Email e obrigatorio.
+      </div>
+      <div *ngIf="inputHasError('email', 'email')">
+        Informe um email valido.
+      </div>
+    </div>
   </div>
   <div class="">
-    <label for="exampleInputPassword1" class="form-label">Senha</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
+    <label for="password" class="form-label">Senha</label>
+    <input type="password" class="form-control" id="password" formControlName="password"
+           [ngClass]="getInputClassConfig('password')">
+    <div *ngIf="inputIsInvalid('password')" class="alert alert-danger mt-1 py-2">
+      <div *ngIf="inputHasError('password', 'required')">
+        Senha e obrigatorio.
+      </div>
+      <div *ngIf="inputHasError('password', 'minlength')">
+        Senha deve conter ao menos 6 caracteres.
+      </div>
+    </div>
   </div>
   <div class="d-grid gap-2 mt-4">
-    <button class="btn btn-primary btn-lg" type="submit">Entrar</button>
+    <button class="btn btn-primary btn-lg d-flex align-items-center justify-content-center" type="button" [disabled]="!isValid() || loading" (click)="login()">
+      <div class="spinner-border me-3" role="status" *ngIf="loading">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      Entrar
+    </button>
   </div>
 </form>

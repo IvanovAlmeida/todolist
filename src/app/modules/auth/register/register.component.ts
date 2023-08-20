@@ -1,9 +1,9 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {AuthenticationService} from "../../../shared/services/authentication.service";
-import {AuthResponse, UserRegister} from "../../../shared/models/user.model";
+import {AuthenticationService} from "src/app/shared/services/authentication.service";
+import {AuthResponse, UserRegister} from "src/app/shared/models/user.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {matchValidator} from "../../../shared/functions/match-validator";
-import {SessionStorageUtils} from "../../../shared/utils/session-storage.utils";
+import {matchValidator} from "src/app/shared/functions/match-validator";
+import {SessionStorageUtils} from "src/app/shared/utils/session-storage.utils";
 import {Router} from "@angular/router";
 
 @Component({
@@ -43,7 +43,7 @@ export class RegisterComponent {
     });
   }
 
-  register() {
+  register(): void {
     this.errors = [];
     this.success = false;
     this.loading = true;

@@ -7,8 +7,6 @@ import {AuthResponse, UserLogin, UserRegister} from "../models/user.model";
   providedIn: 'root'
 })
 export class AuthenticationService extends BaseService {
-
-
   login(user: UserLogin): Observable<any> {
     const url = `${this.apiUrl}/auth/login`;
     return this.httpClient.post(url, user);
