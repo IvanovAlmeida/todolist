@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {AuthenticationService} from "../../../shared/services/authentication.service";
-import {AuthResponse, UserRegister} from "../../../shared/models/user.model";
+import {AuthResponse, User, UserRegister} from "../../../shared/models/user.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {matchValidator} from "../../../shared/functions/match-validator";
 
@@ -42,13 +42,24 @@ export class RegisterComponent {
   register() {
     this.errors = [];
     this.success = false;
-    this.authService.register({} as UserRegister).subscribe({
-      next: (data: AuthResponse) => {
+    this.loading = true;
 
+    const register = {
+      name: this.registerForm.controls['name'].value,
+      email: this.registerForm.controls['email'].value,
+      password: this.registerForm.controls['password'].value,
+      passwordConfirm: this.registerForm.controls['passwordConfirm'].value,
+    } as UserRegister;
+
+    this.authService.register(register).subscribe({
+      next: (data: AuthResponse) => {
+        console.log(data);
       },
       error: (err) => {
         this.loading = false;
         this.errors = err.error.erros;
+      }, complete: () => {
+        this.loading = false;
       }
     })
   }
