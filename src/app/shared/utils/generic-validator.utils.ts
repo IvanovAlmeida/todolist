@@ -20,11 +20,17 @@ export class GenericValidatorUtils {
       if (this.validationMessages[controlKey]) {
         messages[controlKey] = '';
         if ((c.dirty || c.touched) && c.errors) {
-          Object.keys(c.errors).forEach(messageKey => {
-            if (this.validationMessages[controlKey][messageKey]) {
-              messages[controlKey] += this.validationMessages[controlKey][messageKey];
+          Object.keys(c.errors).forEach((value, index, array) => {
+            if (this.validationMessages[controlKey][value]) {
+              if (array.length == index + 1) {
+                messages[controlKey] += this.validationMessages[controlKey][value];
+              } else {
+                messages[controlKey] += this.validationMessages[controlKey][value] + '<br>';
+              }
             }
           });
+
+          console.log(messages[controlKey]);
         }
       }
     }
