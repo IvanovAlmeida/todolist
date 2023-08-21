@@ -20,11 +20,15 @@ export class SessionStorageUtils {
     return this.getItemAsString('accessToken');
   }
 
+  public clear(): void {
+    sessionStorage.clear();
+  }
+
   private getItemString(key: string): string|null {
     return sessionStorage.getItem(this.getKey(key));
   }
 
-  private getItem<T>(key: string): T|null {
+  public getItem<T>(key: string): T|null {
     const value = this.getItemString(key);
     if (value === null || value === '') {
       return null;
