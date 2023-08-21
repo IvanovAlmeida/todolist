@@ -19,56 +19,33 @@
     <label for="nome" class="form-label">Nome</label>
     <input type="text" class="form-control" id="nome" formControlName="name"
            [ngClass]="getInputClassConfig('name')">
-    <div *ngIf="inputIsInvalid('name')" class="alert alert-danger mt-1 py-2">
-      <div *ngIf="inputHasError('name', 'required')">
-        Nome e obrigatorio.
-      </div>
-      <div *ngIf="inputHasError('name', 'minlength')">
-        Nome deve conter no minimo 4 caracteres.
-      </div>
-    </div>
+    <span class="text-danger" *ngIf="displayMessage['name']">
+        <p [innerHTML]="displayMessage['name']"></p>
+    </span>
   </div>
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
     <input type="email" class="form-control" id="email" formControlName="email"
            [ngClass]="getInputClassConfig('email')">
-    <div *ngIf="inputIsInvalid('email')" class="alert alert-danger mt-1 py-2">
-      <div *ngIf="inputHasError('email', 'required')">
-        Email e obrigatorio.
-      </div>
-      <div *ngIf="inputHasError('email', 'email')">
-        Informe um email valido.
-      </div>
-    </div>
+    <span class="text-danger" *ngIf="displayMessage['email']">
+        <p [innerHTML]="displayMessage['email']"></p>
+    </span>
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">Senha</label>
     <input type="password" class="form-control" id="password" formControlName="password"
            [ngClass]="getInputClassConfig('password')">
-    <div *ngIf="inputIsInvalid('password')" class="alert alert-danger mt-1 py-2">
-      <div *ngIf="inputHasError('password', 'required')">
-        Senha e obrigatorio.
-      </div>
-      <div *ngIf="inputHasError('password', 'minlength')">
-        Senha deve conter ao menos 6 caracteres.
-      </div>
-    </div>
+    <span class="text-danger" *ngIf="displayMessage['password']">
+        <p [innerHTML]="displayMessage['password']"></p>
+    </span>
   </div>
   <div class="">
     <label for="passwordConfirm" class="form-label">Confirmação de Senha</label>
     <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm"
            [ngClass]="getInputClassConfig('passwordConfirm')">
-    <div *ngIf="inputIsInvalid('passwordConfirm')" class="alert alert-danger mt-1 py-2">
-      <div *ngIf="inputHasError('passwordConfirm', 'required')">
-        A confirmacao da senha e obrigatorio.
-      </div>
-      <div *ngIf="inputHasError('passwordConfirm', 'minlength')">
-        A confirmacao da senha deve conter ao menos 6 caracteres.
-      </div>
-      <div *ngIf="inputHasError('passwordConfirm', 'matching')">
-        As senhas nao conferem.
-      </div>
-    </div>
+    <span class="text-danger" *ngIf="displayMessage['passwordConfirm']">
+        <p [innerHTML]="displayMessage['passwordConfirm']"></p>
+    </span>
   </div>
   <div class="d-grid gap-2 mt-4">
     <button class="btn btn-primary btn-lg d-flex align-items-center justify-content-center" type="button" [disabled]="!isValid() || loading" (click)="register()">

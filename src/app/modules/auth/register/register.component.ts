@@ -1,10 +1,11 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {AuthenticationService} from "src/app/shared/services/authentication.service";
 import {AuthResponse, UserRegister} from "src/app/shared/models/user.model";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormControlName, FormGroup, Validators} from "@angular/forms";
 import {matchValidator} from "src/app/shared/functions/match-validator";
 import {SessionStorageUtils} from "src/app/shared/utils/session-storage.utils";
 import {Router} from "@angular/router";
+import {FormBaseComponentComponent} from "src/app/shared/components/form-base-component/form-base-component.component";
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class RegisterComponent {
+export class RegisterComponent extends FormBaseComponentComponent implements AfterViewInit {
+  @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[] = [];
 
   loading = false;
   success = false;
@@ -23,10 +25,33 @@ export class RegisterComponent {
 
   private readonly sessionStorage = new SessionStorageUtils();
 
-  constructor(private authService: AuthenticationService, private router: Router) {
+  constructor(private authService: AuthenticationService, private router: Router,
+              private fb: FormBuilder) {
+    super();
+
     this.userRegister = {} as UserRegister;
 
-    this.registerForm = new FormGroup({
+    this.validationMessages = {
+      name: {
+        required: 'Informe um nome',
+        minlength: 'Nome deve conter no minimo 4 caracteres.'
+      },
+      email: {
+        required: 'Informe um email',
+        email: 'Informe um email valido.'
+      },
+      password: {
+        required: 'Informe uma senha',
+        minlength: 'Senha deve conter ao menos 6 caracteres.'
+      },
+      passwordConfirm: {
+        required: 'A confirmacao da senha e obrigatorio.',
+        minlength: 'A confirmacao da senha deve conter ao menos 6 caracteres.',
+        matching: 'As senhas nao conferem.'
+      }
+    };
+
+    this.registerForm = this.fb.group({
       name: new FormControl(this.userRegister.name, [
         Validators.required,
         Validators.minLength(4)
@@ -41,6 +66,12 @@ export class RegisterComponent {
         Validators.required, Validators.minLength(6), matchValidator('password')
       ])
     });
+
+    super.configureValidationMessagesBase(this.validationMessages);
+  }
+
+  ngAfterViewInit() {
+    super.configureFormValidationBase(this.formInputElements, this.registerForm);
   }
 
   register(): void {
@@ -79,25 +110,10 @@ export class RegisterComponent {
     return this.errors.length !== 0;
   }
 
-  inputIsInvalid(inputName: string): boolean {
-    console.log(this.registerForm)
-    return this.registerForm.controls[inputName].invalid &&
-      (this.registerForm.controls[inputName].dirty || this.registerForm.controls[inputName].touched);
-  }
-
-  inputIsValid(inputName: string): boolean {
-    return this.registerForm.controls[inputName].valid &&
-      (this.registerForm.controls[inputName].dirty || this.registerForm.controls[inputName].touched);
-  }
-
-  inputHasError(inputName: string, error: string): boolean {
-    return this.registerForm.controls[inputName].errors?.[error];
-  }
-
   getInputClassConfig(inputName: string): any {
     return {
-      'is-invalid': this.inputIsInvalid(inputName),
-      'is-valid': this.inputIsValid(inputName)
+      'is-invalid': this.displayMessage[inputName],
+      'is-valid': this.displayMessage[inputName]
     };
   }
 }
