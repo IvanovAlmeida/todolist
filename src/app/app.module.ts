@@ -9,8 +9,9 @@ import { AppLayoutComponent } from './shared/layouts/app-layout/app-layout.compo
 import {SidebarComponent} from "./shared/layouts/app-layout/subcomponents/sidebar/sidebar.component";
 import {AuthenticationService} from "./shared/services/authentication.service";
 import {CommonModule} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
