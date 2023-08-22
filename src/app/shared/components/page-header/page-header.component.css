@@ -1,0 +1,16 @@
+.btn.btn-primary.btn-novo {
+  background-color: #202342;
+  border-color: #202342;
+  width: 100px;
+  height: 37px;
+  border-radius: 4px;
+}
+
+h3,
+.icon-div i.bi {
+  color: #202342;
+}
+
+.icon-div i {
+  background-color: white;
+}

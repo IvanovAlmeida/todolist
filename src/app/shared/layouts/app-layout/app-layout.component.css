@@ -11,3 +11,7 @@ body {
 .app .row {
   height: 100%;
 }
+
+.app-content {
+  background-color: #E9ECEF;
+}

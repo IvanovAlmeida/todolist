@@ -23,7 +23,7 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthenticationService

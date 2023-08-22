@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class TasksComponent {
 
+  onButtonClick(): void {
+    console.log('Button novo has clicked')
+  }
 }
