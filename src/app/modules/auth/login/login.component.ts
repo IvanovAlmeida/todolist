@@ -67,7 +67,6 @@ export class LoginComponent {
   }
 
   inputIsInvalid(inputName: string): boolean {
-    console.log(this.userLogin)
     return this.loginForm.controls[inputName].invalid &&
       (this.loginForm.controls[inputName].dirty || this.loginForm.controls[inputName].touched);
   }
