@@ -1,13 +1,10 @@
 <div class="card task-item">
   <div class="card-body">
-    <h5 class="card-title text-danger ">Em atraso</h5>
+    <h6 class="card-title text-danger ">Em atraso</h6>
     <hr class="pt-0 mt-0">
-    <div class="task-title">
-      <div class="d-flex justify-content-between">
-        <h4 class="">{{task.description}}</h4>
-        <ng-container *ngTemplateOutlet="dropdown; context:{task: task}"></ng-container>
-      </div>
-      <h6 class="card-subtitle mb-2 text-body-secondary">Desrição</h6>
+    <div class="task-title d-flex justify-content-between mb-3">
+      <h5 class="p-0 mb-0">{{task.description}}</h5>
+      <ng-container *ngTemplateOutlet="dropdown; context:{task: task}"></ng-container>
     </div>
     <div class="task-infos d-flex">
       <div class="p-1 ps-0 me-2 d-flex align-items-center">
