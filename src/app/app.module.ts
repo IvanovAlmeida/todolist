@@ -10,6 +10,7 @@ import {SidebarComponent} from "./shared/layouts/app-layout/subcomponents/sideba
 import {AuthenticationService} from "./shared/services/authentication.service";
 import {CommonModule} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     CommonModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FontAwesomeModule
   ],
   providers: [
     AuthenticationService
