@@ -1,0 +1,51 @@
+<div class="card task-item">
+  <div class="card-body">
+    <h5 class="card-title text-danger ">Em atraso</h5>
+    <hr class="pt-0 mt-0">
+    <div class="task-title">
+      <div class="d-flex justify-content-between">
+        <h4 class="">{{task.description}}</h4>
+        <ng-container *ngTemplateOutlet="dropdown; context:{task: task}"></ng-container>
+      </div>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Desrição</h6>
+    </div>
+    <div class="task-infos d-flex">
+      <div class="p-1 ps-0 me-2 d-flex align-items-center">
+        <i class="bi bi-list-ul fs-5 me-2"></i> Tarefas
+      </div>
+      <div class="p-1 ps-0 d-flex align-items-center">
+        <i class="bi bi-clock fs-5 me-2"></i> 24 de Outubro, 10:15
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #dropdown let-task="task">
+  <div class="btn-group" dropdown placement="bottom right">
+    <button id="task-options" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-basic">
+      <span class="bi bi-three-dots-vertical"></span>
+    </button>
+    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
+        role="menu" aria-labelledby="button-basic">
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="onConclude(task)">
+          <i class="bi bi-check-circle me-2"></i>
+          Concluir
+        </a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="onEdit(task)">
+          <i class="bi bi-pencil-fill me-2"></i>
+          Editar
+        </a>
+      </li>
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="onDelete(task)">
+          <i class="bi bi-trash3 me-2"></i>
+          Remover
+        </a>
+      </li>
+    </ul>
+  </div>
+</ng-template>

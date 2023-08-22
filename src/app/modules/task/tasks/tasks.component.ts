@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Assignment} from "../../../shared/models/assignment.model";
 
 @Component({
   selector: 'app-tasks',
@@ -7,41 +8,46 @@ import { Component } from '@angular/core';
 })
 export class TasksComponent {
 
-  items: any[] = [
+  items: Assignment[] = [
     {
-      id: 1,
-      name: 'teste 3'
-    },{
-      id: 2,
-      name: 'teste 3'
-    },{
-      id: 3,
-      name: 'teste 4'
-    },{
-      id: 4,
-      name: 'teste4 '
-    },{
-      id: 5,
-      name: 'testettt'
-    },{
-      id: 6,
-      name: 'testett'
-    },
+      id: '1231323',
+      description: 'Desc123'
+    } as Assignment,
+    {
+      id: '1231323',
+      description: 'Desc123'
+    } as Assignment,
+    {
+      id: '1231323',
+      description: 'Desc123'
+    } as Assignment,
+    {
+      id: '1231323',
+      description: 'Desc123'
+    } as Assignment,
+    {
+      id: '1231323',
+      description: 'Desc123'
+    } as Assignment,
+    {
+      id: '1231323',
+      description: 'Desc123'
+    } as Assignment
   ];
 
   onButtonClick(): void {
     console.log('Button novo has clicked')
   }
 
-  onConclude(data: any): void {
-    console.log('onConclude', data);
+  onConclude(task: Assignment): void {
+    console.log('received onConclude', task);
   }
 
-  onEdit(data: any): void {
-    console.log('onEdit', data);
+  onEdit(task: Assignment): void {
+    console.log('received onEdit', task);
   }
 
-  onDelete(data: any): void {
-    console.log('onDelete', data);
+  onDelete(task: Assignment): void {
+    console.log('received onDelete', task);
   }
 }

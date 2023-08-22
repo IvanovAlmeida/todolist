@@ -7,6 +7,7 @@ import {SharedComponentsModule} from "../../shared/components/shared-components.
 import {AccordionModule} from "ngx-bootstrap/accordion";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import {TaskListModule} from "../task-list/task-list.module";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {BsDropdownModule} from "ngx-bootstrap/dropdown";
     SharedComponentsModule,
     AccordionModule,
     BsDatepickerModule,
-    BsDropdownModule
+    BsDropdownModule,
+    TaskListModule
   ]
 })
 export class TaskModule { }
