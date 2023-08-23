@@ -11,13 +11,10 @@ import {AssignmentListService} from "../../../shared/services/assignment-list.se
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private assignmentService: AssignmentService,
-              private assignmentListService: AssignmentListService) { }
+  constructor(private assignmentService: AssignmentService) { }
 
   items: Assignment[] = [];
   pagedResult: PagedResponse<Assignment> = {} as PagedResponse<Assignment>;
-
-  listNames: AssignmentList[] = [];
 
   filter: AssignmentFilter = {
     perPage: 3,
@@ -26,9 +23,6 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
-    this.assignmentListService.getAllNames().subscribe(resp => {
-      this.listNames = resp.items;
-    });
   }
 
   onSearch(): void {
@@ -68,10 +62,6 @@ export class TasksComponent implements OnInit {
     }
 
     this.filter.concluded = selectedValue === 'true';
-  }
-
-  changeListOption(event: any): void {
-
   }
 
   private search(more: boolean = false) {

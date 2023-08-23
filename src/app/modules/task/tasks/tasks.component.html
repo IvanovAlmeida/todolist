@@ -28,14 +28,6 @@
         </div>
 
         <div class="col">
-          <label for="list" class="col-form-label">Lista</label>
-          <select class="form-select" aria-label="Default select example" id="list" (change)="changeListOption($event)">
-            <option selected="selected" value=""></option>
-            <option *ngFor="let list of listNames" value="{{list.id}}">{{list.name}}</option>
-          </select>
-        </div>
-
-        <div class="col">
           <label for="sort" class="col-form-label">Ordernar Por</label>
           <select class="form-select" aria-label="Default select example" id="sort">
             <option selected>Open this select menu</option>
