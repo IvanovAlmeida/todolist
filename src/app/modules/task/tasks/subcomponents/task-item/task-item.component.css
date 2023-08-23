@@ -1,0 +1,18 @@
+li.task-item {
+  border-radius: 5px !important;
+}
+
+button.dropdown-toggle {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+button#task-options.dropdown-toggle::after {
+  content: none;
+}
+
+button#task-options {
+  padding: 0;
+  background-color: inherit;
+  color: #33333380;
+  border: none;
+}

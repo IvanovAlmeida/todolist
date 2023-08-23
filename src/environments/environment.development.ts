@@ -1,7 +1,6 @@
 export const environment = {
   production: false,
-  //apiUrl: 'https://api.todo.maracanau.ifce.edu.br',
-  apiUrl: 'https://localhost:7069',
+  apiUrl: 'https://api.todo.maracanau.ifce.edu.br',
 
   sessionPrefix: 'todo',
 

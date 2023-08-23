@@ -10,3 +10,12 @@
 .sidebar .user-info div:last-child {
   cursor: pointer;
 }
+
+.nav-link {
+  border-radius: unset;
+}
+
+.nav-link.active {
+  background-color: #E9ECEF;
+  color: #202342 !important;
+}

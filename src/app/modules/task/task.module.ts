@@ -8,11 +8,13 @@ import {AccordionModule} from "ngx-bootstrap/accordion";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import {TaskListModule} from "../task-list/task-list.module";
+import { TaskItemComponent } from './tasks/subcomponents/task-item/task-item.component';
 
 
 @NgModule({
   declarations: [
-    TasksComponent
+    TasksComponent,
+    TaskItemComponent
   ],
   imports: [
     CommonModule,

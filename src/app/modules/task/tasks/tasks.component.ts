@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Assignment, AssignmentFilter, PagedResponse} from "../../../shared/models/assignment.model";
-import {AssignmentService} from "../../../shared/services/assignment.service";
-import {AssignmentList} from "../../../shared/models/assignment-list";
-import {AssignmentListService} from "../../../shared/services/assignment-list.service";
+import {Assignment, AssignmentFilter, PagedResponse} from "src/app/shared/models/assignment.model";
+import {AssignmentService} from "src/app/shared/services/assignment.service";
 
 @Component({
   selector: 'app-tasks',
@@ -11,13 +9,10 @@ import {AssignmentListService} from "../../../shared/services/assignment-list.se
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private assignmentService: AssignmentService,
-              private assignmentListService: AssignmentListService) { }
+  constructor(private assignmentService: AssignmentService) { }
 
   items: Assignment[] = [];
   pagedResult: PagedResponse<Assignment> = {} as PagedResponse<Assignment>;
-
-  listNames: AssignmentList[] = [];
 
   filter: AssignmentFilter = {
     perPage: 3,
@@ -26,9 +21,6 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
-    this.assignmentListService.getAllNames().subscribe(resp => {
-      this.listNames = resp.items;
-    });
   }
 
   onSearch(): void {
@@ -47,31 +39,6 @@ export class TasksComponent implements OnInit {
       perPage: 3,
       page: 1
     } as AssignmentFilter;
-  }
-
-  onDateChange(dates: (Date|undefined)[]|undefined) {
-    if (dates === undefined) {
-      this.filter.startDeadline = null;
-      this.filter.endDeadline = null;
-      return;
-    }
-
-    this.filter.startDeadline = dates[0]?.toJSON() ?? null;
-    this.filter.endDeadline = dates[1]?.toJSON() ?? null;
-  }
-
-  changeStatusOption(event: any): void {
-    const selectedValue = event.target.value;
-    if (selectedValue === null || selectedValue === '') {
-      this.filter.concluded = null;
-      return;
-    }
-
-    this.filter.concluded = selectedValue === 'true';
-  }
-
-  changeListOption(event: any): void {
-
   }
 
   private search(more: boolean = false) {
