@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Assignment} from "../../../../../shared/models/assignment.model";
+import {Assignment} from "../../models/assignment.model";
 
 @Component({
-  selector: 'app-task-item',
-  templateUrl: './task-item.component.html',
-  styleUrls: ['./task-item.component.css']
+  selector: 'task-list',
+  templateUrl: './task-list.component.html',
+  styleUrls: ['./task-list.component.css']
 })
-export class TaskItemComponent {
+export class TaskListComponent {
   @Input() items: Assignment[] = [];
 
   @Output() onConcludeEvent: EventEmitter<Assignment> = new EventEmitter<Assignment>();
