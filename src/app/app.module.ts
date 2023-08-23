@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -8,10 +8,13 @@ import { AuthLayoutComponent } from './shared/layouts/auth/auth-layout.component
 import { AppLayoutComponent } from './shared/layouts/app-layout/app-layout.component';
 import {SidebarComponent} from "./shared/layouts/app-layout/subcomponents/sidebar/sidebar.component";
 import {AuthenticationService} from "./shared/services/authentication.service";
-import {CommonModule} from "@angular/common";
+import {CommonModule, registerLocaleData} from "@angular/common";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
   providers: [
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })

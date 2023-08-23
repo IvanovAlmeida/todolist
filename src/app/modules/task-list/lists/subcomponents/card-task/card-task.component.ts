@@ -13,6 +13,20 @@ export class CardTaskComponent {
   @Output() onEditEvent: EventEmitter<Assignment> = new EventEmitter<Assignment>();
   @Output() onDeleteEvent: EventEmitter<Assignment> = new EventEmitter<Assignment>();
 
+  taskStatus(): string {
+    const now = new Date();
+    const deadline = new Date(this.task.deadline);
+    if (now > deadline) {
+      return 'Para Fazer';
+    }
+
+    if (now < deadline) {
+      return 'Em atraso';
+    }
+
+    return 'Ultimo dia';
+  }
+
   onConclude(data: Assignment): void {
     console.log('onConclude', data);
     this.onConcludeEvent.emit(data);

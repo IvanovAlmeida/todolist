@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Assignment, AssignmentFilter, PagedResponse} from "../../../shared/models/assignment.model";
 import {AssignmentService} from "../../../shared/services/assignment.service";
+import {AssignmentList} from "../../../shared/models/assignment-list";
+import {AssignmentListService} from "../../../shared/services/assignment-list.service";
 
 @Component({
   selector: 'app-tasks',
@@ -9,10 +11,13 @@ import {AssignmentService} from "../../../shared/services/assignment.service";
 })
 export class TasksComponent implements OnInit {
 
-  constructor(private assignmentService: AssignmentService) { }
+  constructor(private assignmentService: AssignmentService,
+              private assignmentListService: AssignmentListService) { }
 
   items: Assignment[] = [];
   pagedResult: PagedResponse<Assignment> = {} as PagedResponse<Assignment>;
+
+  listNames: AssignmentList[] = [];
 
   filter: AssignmentFilter = {
     perPage: 3,
@@ -21,6 +26,9 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
+    this.assignmentListService.getAllNames().subscribe(resp => {
+      this.listNames = resp.items;
+    });
   }
 
   onSearch(): void {
@@ -60,6 +68,10 @@ export class TasksComponent implements OnInit {
     }
 
     this.filter.concluded = selectedValue === 'true';
+  }
+
+  changeListOption(event: any): void {
+
   }
 
   private search(more: boolean = false) {

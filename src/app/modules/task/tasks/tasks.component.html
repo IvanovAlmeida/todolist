@@ -17,14 +17,24 @@
                  [bsConfig]="{ isAnimated: true }"
                  (bsValueChange)="onDateChange($event)">
         </div>
+
         <div class="col">
-          <label for="list" class="col-form-label">Status</label>
-          <select class="form-select" aria-label="Default select example" id="list" (change)="changeStatusOption($event)">
+          <label for="status" class="col-form-label">Status</label>
+          <select class="form-select" aria-label="Default select example" id="status" (change)="changeStatusOption($event)">
             <option selected="selected" value="">Todos</option>
             <option value="false">Concluido</option>
             <option value="true">Em aberto</option>
           </select>
         </div>
+
+        <div class="col">
+          <label for="list" class="col-form-label">Lista</label>
+          <select class="form-select" aria-label="Default select example" id="list" (change)="changeListOption($event)">
+            <option selected="selected" value=""></option>
+            <option *ngFor="let list of listNames" value="{{list.id}}">{{list.name}}</option>
+          </select>
+        </div>
+
         <div class="col">
           <label for="sort" class="col-form-label">Ordernar Por</label>
           <select class="form-select" aria-label="Default select example" id="sort">
