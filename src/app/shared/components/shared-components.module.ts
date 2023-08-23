@@ -3,18 +3,22 @@ import {PageHeaderComponent} from "./page-header/page-header.component";
 import {NgClass, NgForOf, NgIf, NgTemplateOutlet} from "@angular/common";
 import {TaskListComponent} from "./task-list/task-list.component";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import { TaskItemFormComponent } from './task-list/subcomponents/task-item-form/task-item-form.component';
+import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 
 @NgModule({
   declarations: [
     PageHeaderComponent,
-    TaskListComponent
+    TaskListComponent,
+    TaskItemFormComponent
   ],
   imports: [
     NgIf,
     NgClass,
     NgTemplateOutlet,
     NgForOf,
-    BsDropdownModule
+    BsDropdownModule,
+    BsDatepickerModule
   ],
   exports: [
     PageHeaderComponent,

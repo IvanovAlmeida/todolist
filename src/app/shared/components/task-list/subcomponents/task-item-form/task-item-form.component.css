@@ -1,0 +1,34 @@
+.task-item.task-form .input-name,
+.task-item.task-form .input-name:active,
+.task-item.task-form .input-name:focus,
+.task-item.task-form .input-name:focus-visible {
+  border: none !important;
+  outline: none;
+}
+
+.task-item.task-form .input-deadline {
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+}
+
+.deadline i,
+.deadline span {
+  color: #202342;
+}
+
+.deadline button.with-value {
+  border: 1px solid #202342 !important;
+}
+
+.btn-add {
+  color: #202342;
+  border-color: #202342;
+}
+
+.btn-add:hover {
+  color: white;
+  border-color: #202342;
+  background-color: #202342;
+}
