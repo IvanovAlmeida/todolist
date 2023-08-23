@@ -5,6 +5,7 @@ import {TaskListComponent} from "./task-list/task-list.component";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { TaskItemFormComponent } from './task-list/subcomponents/task-item-form/task-item-form.component';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
     NgTemplateOutlet,
     NgForOf,
     BsDropdownModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    FormsModule
   ],
   exports: [
     PageHeaderComponent,

@@ -23,24 +23,6 @@ export class TasksComponent implements OnInit {
     this.search();
   }
 
-  onSearch(): void {
-    this.filter = { ...this.filter, ...this.defaultFilter() };
-    this.search();
-  }
-
-  onReset(): void {
-    this.filter = this.defaultFilter();
-
-    this.search();
-  }
-
-  private defaultFilter(): AssignmentFilter {
-    return {
-      perPage: 3,
-      page: 1
-    } as AssignmentFilter;
-  }
-
   private search(more: boolean = false) {
     this.assignmentService.search(this.filter).subscribe({
       next: (response) => {

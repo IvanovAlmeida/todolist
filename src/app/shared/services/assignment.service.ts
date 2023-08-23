@@ -19,6 +19,11 @@ export class AssignmentService extends BaseService {
     });
   }
 
+  createTask(task: Assignment): Observable<Assignment> {
+    const url = `${this.apiUrl}/Assignments`;
+    return this.httpClient.post<Assignment>(url, task);
+  }
+
   parseToQueryString(params: any): string {
     return Object.keys(params).map(key => {
       return `${key}=${encodeURIComponent(params[key])}`;

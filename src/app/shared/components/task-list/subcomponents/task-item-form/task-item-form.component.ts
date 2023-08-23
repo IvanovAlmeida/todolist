@@ -1,4 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
+import {Assignment} from "src/app/shared/models/assignment.model";
+import {AssignmentService} from "../../../../services/assignment.service";
 
 @Component({
   selector: 'task-item-form',
@@ -6,22 +8,47 @@ import {Component} from '@angular/core';
   styleUrls: ['./task-item-form.component.css', '../../task-list.component.css']
 })
 export class TaskItemFormComponent {
-  bsValue: Date|undefined = undefined;
+  newItem: Assignment = { description: '' } as Assignment;
+  deadline: Date|undefined = undefined;
+  loading: boolean = false;
 
-  dateLabel = '';
+  @Output()
+  taskCreatedEmitter: EventEmitter<Assignment> = new EventEmitter<Assignment>();
 
-  datePickerConfig = {
-    adaptivePosition: false,
-    isAnimated: true,
-    showClearButton: true,
-    clearPosition: 'right',
-    containerClass: 'theme-default'
-  };
-
-  onDateChange(): void {
-    console.log('trocado')
-    this.dateLabel = this.bsValue?.toDateString() ?? '';
+  get datePickerConfig(): any {
+    return {
+      adaptivePosition: false, isAnimated: true, showClearButton: true,
+      clearPosition: 'right', containerClass: 'theme-default'
+    };
   }
 
-  protected readonly undefined = undefined;
+  constructor(private assignmentService: AssignmentService) {
+  }
+
+  formIsValid(): boolean {
+    return this.newItem.description !== '' || !this.loading;
+  }
+
+  createTask(): void {
+    if (this.deadline) {
+      this.newItem.deadline = this.deadline.toJSON();
+    }
+
+    this.loading = true;
+    this.assignmentService
+      .createTask(this.newItem)
+      .subscribe({
+        next: task => {
+          this.newItem.description = '';
+          this.newItem.deadline = null;
+
+          this.loading = false;
+          this.taskCreatedEmitter.emit(task);
+        },
+        error: err => {
+          this.loading = false;
+          console.log(err);
+        }
+      });
+  }
 }

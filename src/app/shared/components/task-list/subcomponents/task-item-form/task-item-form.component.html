@@ -3,30 +3,32 @@
     <div class="flex-shrink-1 me-3">
       <input class="form-check-input" type="checkbox" disabled id="">
     </div>
-    <input type="text" placeholder="Adicionar uma tarefa" class="flex-grow-1 input-name" />
+    <input type="text" placeholder="Adicionar uma tarefa" class="flex-grow-1 input-name" [(ngModel)]="newItem.description" />
   </div>
   <div class="px-3 py-2 d-flex justify-content-between align-items-center">
     <div class="d-flex justify-content-center deadline">
       <button class="btn btn-sm p-0 py-1 border-0 me-2"
               (click)="dp.toggle()"
               [attr.aria-expanded]="dp.isOpen"
-              [ngClass]="{ 'with-value px-2': bsValue !== undefined, 'px-0': bsValue === undefined }"
+              [ngClass]="{ 'with-value px-2': deadline !== undefined, 'px-0': deadline === undefined }"
               type="button">
         <i class="bi bi-calendar3"></i>
         <span class="ms-2">
-          {{bsValue?.toDateString()}}
+          {{deadline?.toDateString()}}
         </span>
       </button>
       <input type="text"
              class="form-control input-deadline"
              #dp="bsDatepicker"
              bsDatepicker
-             [(bsValue)]="bsValue"
+             [(bsValue)]="deadline"
              [bsConfig]="datePickerConfig"
              placement="right">
     </div>
     <div class="">
-      <button class="btn btn-sm btn-outline-primary px-4 btn-add">Adicionar</button>
+      <button class="btn btn-sm btn-outline-primary px-4 btn-add" [disabled]="!formIsValid()" (click)="createTask()">
+        Adicionar
+      </button>
     </div>
   </div>
 </div>

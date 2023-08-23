@@ -13,6 +13,12 @@ export class TaskListComponent {
   @Output() onEditEvent: EventEmitter<Assignment> = new EventEmitter<Assignment>();
   @Output() onDeleteEvent: EventEmitter<Assignment> = new EventEmitter<Assignment>();
 
+  onTaskCreated(task: Assignment): void {
+    this.items.reverse();
+    this.items.push(task);
+    this.items.reverse();
+  }
+
   onConclude(data: Assignment): void {
     console.log('onConclude', data);
     this.onConcludeEvent.emit(data);

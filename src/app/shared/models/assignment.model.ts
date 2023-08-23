@@ -4,7 +4,7 @@ export interface Assignment {
   id: string;
   description: string;
   assignmentListId: string;
-  deadline: string;
+  deadline: string|null;
   concluded: boolean;
   concludedAt: string;
   userId: string;

@@ -1,6 +1,6 @@
 <ul class="list-group">
 
-  <task-item-form></task-item-form>
+  <task-item-form (taskCreatedEmitter)="onTaskCreated($event)"></task-item-form>
 
   <li class="list-group-item d-flex align-items-center my-1 py-2 task-item" *ngFor="let item of items">
     <div class="flex-shrink-1 me-3">

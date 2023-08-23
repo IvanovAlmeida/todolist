@@ -1,11 +1,10 @@
 <app-page-header
   iconClass="bi-clipboard2-data-fill" title="Tarefas" description="Página de gerenciamento das tarefas"
-  [showButton]="true" textButton="Novo" iconClassButton="bi-plus-lg" (buttonEvent)="onButtonClick()"
 ></app-page-header>
 
 <div class="row mt-3">
   <div class="col">
-    <task-list [items]="items" ></task-list>
+    <task-list [items]="items"  ></task-list>
   </div>
 
   <div class="col-12 pt-3 d-flex justify-content-center">
