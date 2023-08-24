@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Assignment, AssignmentFilter, PagedResponse} from "src/app/shared/models/assignment.model";
 import {AssignmentService} from "src/app/shared/services/assignment.service";
+import {map} from "rxjs";
 
 @Component({
   selector: 'app-tasks',
@@ -24,20 +25,28 @@ export class TasksComponent implements OnInit {
   }
 
   private search(more: boolean = false) {
-    this.assignmentService.search(this.filter).subscribe({
-      next: (response) => {
-        if (more) {
-          this.items.push(...response.items);
-        } else {
-          this.items = response.items;
-        }
+    this.assignmentService.search(this.filter)
+      .pipe(map((resp) => {
+        resp.items = resp.items.filter(item => {
+          return !this.items.some(i => i.id === item.id);
+        });
 
-        this.pagedResult = response;
-      },
-      error: (err) => {
-        console.error(err);
-      }
-    })
+        return resp;
+      }))
+      .subscribe({
+        next: (response) => {
+          if (more) {
+            this.items.push(...response.items);
+          } else {
+            this.items = response.items;
+          }
+
+          this.pagedResult = response;
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      })
   }
 
   onButtonClick(): void {
