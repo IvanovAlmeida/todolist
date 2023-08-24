@@ -17,7 +17,8 @@ export class TasksComponent implements OnInit {
 
   filter: AssignmentFilter = {
     perPage: 3,
-    page: 1
+    page: 1,
+    orderDir: 'desc'
   } as AssignmentFilter;
 
   ngOnInit(): void {

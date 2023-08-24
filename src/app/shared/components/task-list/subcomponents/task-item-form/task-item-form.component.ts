@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Assignment} from "src/app/shared/models/assignment.model";
-import {AssignmentService} from "../../../../services/assignment.service";
+import {AssignmentService} from "src/app/shared/services/assignment.service";
+import {BsDatepickerConfig, BsLocaleService} from "ngx-bootstrap/datepicker";
+import { defineLocale } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'task-item-form',
@@ -15,22 +17,23 @@ export class TaskItemFormComponent {
   @Output()
   taskCreatedEmitter: EventEmitter<Assignment> = new EventEmitter<Assignment>();
 
-  get datePickerConfig(): any {
+  get datePickerConfig(): BsDatepickerConfig {
     return {
-      adaptivePosition: false, isAnimated: true, showClearButton: true,
-      clearPosition: 'right', containerClass: 'theme-default'
-    };
+      adaptivePosition: false, isAnimated: true, showWeekNumbers: true,
+      showTodayButton: true, todayButtonLabel: 'Hoje', todayPosition: 'left',
+      showClearButton: true, clearButtonLabel: 'Limpar', clearPosition: 'right'
+    } as BsDatepickerConfig;
   }
 
-  constructor(private assignmentService: AssignmentService) {
-  }
+  constructor(private assignmentService: AssignmentService) { }
 
   formIsValid(): boolean {
-    return this.newItem.description !== '' || !this.loading;
+    return this.newItem.description !== '' && !this.loading;
   }
 
   createTask(): void {
     if (this.deadline) {
+      this.deadline.setHours(23, 59,59, 0);
       this.newItem.deadline = this.deadline.toJSON();
     }
 

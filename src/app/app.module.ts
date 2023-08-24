@@ -13,8 +13,11 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 import localePt from '@angular/common/locales/pt';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+import {defineLocale} from "ngx-bootstrap/chronos";
 
 registerLocaleData(localePt);
+defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
   declarations: [

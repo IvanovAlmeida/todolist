@@ -16,3 +16,15 @@ button#task-options {
   color: #33333380;
   border: none;
 }
+
+.deadline-label {
+  color: rgba(17, 17, 17, 0.6);
+}
+
+.deadline-label.deadline-today {
+  color: rgba(32, 35, 66, 0.93);
+}
+
+.deadline-label.deadline-overdue {
+  color: rgba(255, 0, 0, 0.65);
+}

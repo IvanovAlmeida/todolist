@@ -32,3 +32,13 @@
   border-color: #202342;
   background-color: #202342;
 }
+
+::ng-deep .theme-green .bs-datepicker-head,
+::ng-deep .theme-green button {
+  background-color: #202342 !important;
+  border-color: #202342 !important;
+}
+
+::ng-deep .theme-green .week span {
+  color: #202342 !important;
+}

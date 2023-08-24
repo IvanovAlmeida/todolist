@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {BsLocaleService} from "ngx-bootstrap/datepicker";
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo-list';
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private localeService: BsLocaleService) {
+    this.localeService.use('pt-br');
   }
 
   isAuthModule(): boolean {
