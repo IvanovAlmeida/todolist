@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Assignment} from "src/app/shared/models/assignment.model";
 import {AssignmentService} from "src/app/shared/services/assignment.service";
-import {BsDatepickerConfig, BsLocaleService} from "ngx-bootstrap/datepicker";
-import { defineLocale } from 'ngx-bootstrap/chronos';
+import {BsDatepickerConfig} from "ngx-bootstrap/datepicker";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'task-item-form',
@@ -25,14 +25,14 @@ export class TaskItemFormComponent {
     } as BsDatepickerConfig;
   }
 
-  constructor(private assignmentService: AssignmentService) { }
+  constructor(private assignmentService: AssignmentService, private toastr: ToastrService) { }
 
   formIsValid(): boolean {
     return this.newItem.description !== '' && !this.loading;
   }
 
   createTask(): void {
-    if (this.deadline) {
+   if (this.deadline) {
       this.deadline.setHours(23, 59,59, 0);
       this.newItem.deadline = this.deadline.toJSON();
     }
@@ -47,6 +47,7 @@ export class TaskItemFormComponent {
 
           this.loading = false;
           this.taskCreatedEmitter.emit(task);
+          this.toastr.success("Task cadastrada com sucesso!")
         },
         error: err => {
           this.loading = false;

@@ -3,6 +3,7 @@ export const environment = {
   apiUrl: '',
 
   sessionPrefix: '',
+  logging: false,
 
   isProduction(): boolean {
     return this.production;

@@ -15,6 +15,9 @@ import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
 import localePt from '@angular/common/locales/pt';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import {defineLocale} from "ngx-bootstrap/chronos";
+import {ToastrModule} from "ngx-toastr";
+import {ErrorInterceptor} from "./shared/interceptors/error.interceptor";
+import {LoggingInterceptor} from "./shared/interceptors/logging.interceptor";
 
 registerLocaleData(localePt);
 defineLocale('pt-br', ptBrLocale);
@@ -32,11 +35,14 @@ defineLocale('pt-br', ptBrLocale);
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     AuthenticationService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true },
     {provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
