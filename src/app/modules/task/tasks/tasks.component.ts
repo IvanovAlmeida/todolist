@@ -16,13 +16,17 @@ export class TasksComponent implements OnInit {
   pagedResult: PagedResponse<Assignment> = {} as PagedResponse<Assignment>;
 
   filter: AssignmentFilter = {
-    perPage: 3,
+    perPage: 10,
     page: 1,
     orderDir: 'desc'
   } as AssignmentFilter;
 
   ngOnInit(): void {
     this.search();
+  }
+
+  onScroll(): void {
+    this.loadMore();
   }
 
   private search(more: boolean = false) {
@@ -52,18 +56,6 @@ export class TasksComponent implements OnInit {
 
   onButtonClick(): void {
     console.log('Button novo has clicked')
-  }
-
-  onConclude(task: Assignment): void {
-    console.log('received onConclude', task);
-  }
-
-  onEdit(task: Assignment): void {
-    console.log('received onEdit', task);
-  }
-
-  onDelete(task: Assignment): void {
-    console.log('received onDelete', task);
   }
 
   hasMorePages(): boolean {

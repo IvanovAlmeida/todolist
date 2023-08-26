@@ -24,6 +24,21 @@ export class AssignmentService extends BaseService {
     return this.httpClient.post<Assignment>(url, task);
   }
 
+  conclude(id: string): Observable<void> {
+    const url = `${this.apiUrl}/Assignments/${id}/conclude`;
+    return this.httpClient.patch<void>(url, {});
+  }
+
+  unconclude(id: string): Observable<void> {
+    const url = `${this.apiUrl}/Assignments/${id}/unconclude`;
+    return this.httpClient.patch<void>(url, {});
+  }
+
+  delete(id: string): Observable<void> {
+    const url = `${this.apiUrl}/Assignments/${id}`;
+    return this.httpClient.delete<void>(url);
+  }
+
   parseToQueryString(params: any): string {
     return Object.keys(params).map(key => {
       return `${key}=${encodeURIComponent(params[key])}`;

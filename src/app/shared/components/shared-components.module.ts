@@ -6,6 +6,7 @@ import {BsDropdownModule} from "ngx-bootstrap/dropdown";
 import { TaskItemFormComponent } from './task-list/subcomponents/task-item-form/task-item-form.component';
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {FormsModule} from "@angular/forms";
+import {ProgressbarModule} from "ngx-bootstrap/progressbar";
 
 @NgModule({
   declarations: [
@@ -13,15 +14,16 @@ import {FormsModule} from "@angular/forms";
     TaskListComponent,
     TaskItemFormComponent
   ],
-  imports: [
-    NgIf,
-    NgClass,
-    NgTemplateOutlet,
-    NgForOf,
-    BsDropdownModule,
-    BsDatepickerModule,
-    FormsModule
-  ],
+    imports: [
+        NgIf,
+        NgClass,
+        NgTemplateOutlet,
+        NgForOf,
+        BsDropdownModule,
+        BsDatepickerModule,
+        FormsModule,
+        ProgressbarModule
+    ],
   exports: [
     PageHeaderComponent,
     TaskListComponent

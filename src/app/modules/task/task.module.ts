@@ -6,18 +6,20 @@ import {SharedComponentsModule} from "src/app/shared/components/shared-component
 import {AccordionModule} from "ngx-bootstrap/accordion";
 import {BsDatepickerModule} from "ngx-bootstrap/datepicker";
 import {BsDropdownModule} from "ngx-bootstrap/dropdown";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
     TasksComponent
   ],
-  imports: [
-    CommonModule,
-    TaskRoutingModule,
-    SharedComponentsModule,
-    AccordionModule,
-    BsDatepickerModule,
-    BsDropdownModule
-  ]
+    imports: [
+        CommonModule,
+        TaskRoutingModule,
+        SharedComponentsModule,
+        AccordionModule,
+        BsDatepickerModule,
+        BsDropdownModule,
+        InfiniteScrollModule
+    ]
 })
 export class TaskModule { }

@@ -18,6 +18,8 @@ import {defineLocale} from "ngx-bootstrap/chronos";
 import {ToastrModule} from "ngx-toastr";
 import {ErrorInterceptor} from "./shared/interceptors/error.interceptor";
 import {LoggingInterceptor} from "./shared/interceptors/logging.interceptor";
+import {ProgressbarModule} from "ngx-bootstrap/progressbar";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 registerLocaleData(localePt);
 defineLocale('pt-br', ptBrLocale);
@@ -36,7 +38,9 @@ defineLocale('pt-br', ptBrLocale);
     HttpClientModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [
     AuthenticationService,
