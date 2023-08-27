@@ -1,9 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
 import {Assignment} from "../../models/assignment.model";
 import {DeadlineStatusEnum} from "../../enums/deadline-status.enum";
 import {AssignmentService} from "../../services/assignment.service";
 import {ToastrService} from "ngx-toastr";
 import {ProgressbarConfig} from "ngx-bootstrap/progressbar";
+import {DrawerService} from "../../layouts/app-layout/subcomponents/drawer/drawer.service";
+import {TaskInfoComponent} from "../task-info/task-info.component";
 
 export function getProgressbarConfig(): ProgressbarConfig {
   return Object.assign(new ProgressbarConfig(), { animate: true, striped: true, max: 100, type: 'primary', value: 100 } as ProgressbarConfig);
@@ -15,13 +17,15 @@ export function getProgressbarConfig(): ProgressbarConfig {
   styleUrls: ['./task-list.component.css'],
   providers: [{ provide: ProgressbarConfig, useFactory: getProgressbarConfig }]
 })
-export class TaskListComponent {
+export class TaskListComponent implements OnDestroy {
   @Input() items: Assignment[] = [];
   @Output() onEditEvent: EventEmitter<Assignment> = new EventEmitter<Assignment>();
 
   requestsInProgress: string[] = [];
 
-  constructor(private assignmentService: AssignmentService, private toastr: ToastrService) {
+  constructor(private assignmentService: AssignmentService,
+              private toastr: ToastrService,
+              private drawerService: DrawerService) {
   }
 
   onTaskCreated(task: Assignment): void {
@@ -100,7 +104,6 @@ export class TaskListComponent {
     return new Date(utcTime);
   }
 
-
   onCheckboxChange(task: Assignment): void {
     if (this.hasRequestInProgress(task)) {
       return;
@@ -113,7 +116,6 @@ export class TaskListComponent {
 
     this.concludeTask(task);
   }
-
 
   private concludeTask(task: Assignment): void {
     this.addToProgress(task);
@@ -146,8 +148,7 @@ export class TaskListComponent {
   }
 
   onEdit(data: Assignment): void {
-    console.log('onEdit', data);
-    this.onEditEvent.emit(data);
+    this.drawerService.open(TaskInfoComponent, data);
   }
 
   onDelete(task: Assignment): void {
@@ -181,5 +182,9 @@ export class TaskListComponent {
   private removeFromProgress(task: Assignment): void {
     const idx = this.requestsInProgress.findIndex(r => r === task.id);
     this.requestsInProgress.splice(idx, 1);
+  }
+
+  ngOnDestroy(): void {
+    this.drawerService.close();
   }
 }

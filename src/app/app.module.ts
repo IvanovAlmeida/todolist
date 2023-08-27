@@ -20,6 +20,8 @@ import {ErrorInterceptor} from "./shared/interceptors/error.interceptor";
 import {LoggingInterceptor} from "./shared/interceptors/logging.interceptor";
 import {ProgressbarModule} from "ngx-bootstrap/progressbar";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { DrawerComponent } from './shared/layouts/app-layout/subcomponents/drawer/drawer.component';
+import { DrawerDirective } from './shared/directives/drawer.directive';
 
 registerLocaleData(localePt);
 defineLocale('pt-br', ptBrLocale);
@@ -29,7 +31,9 @@ defineLocale('pt-br', ptBrLocale);
     AppComponent,
     AuthLayoutComponent,
     AppLayoutComponent,
-    SidebarComponent
+    SidebarComponent,
+    DrawerComponent,
+    DrawerDirective
   ],
   imports: [
     BrowserModule,

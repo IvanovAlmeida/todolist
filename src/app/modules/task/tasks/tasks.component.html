@@ -3,7 +3,9 @@
 ></app-page-header>
 
 <div class="row mt-3">
-  <div class="col" infiniteScroll (scrolled)="onScroll()">
-    <task-list [items]="items"  ></task-list>
+  <div class="col" infiniteScroll
+       [fromRoot]="true"
+       [infiniteScrollContainer]="'.app-root-content'" (scrolled)="onScroll()">
+    <task-list [items]="items" ></task-list>
   </div>
 </div>
