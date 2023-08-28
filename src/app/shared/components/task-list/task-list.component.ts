@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnDestroy, Output} from '@angular/core';
-import {Assignment} from "../../models/assignment.model";
-import {DeadlineStatusEnum} from "../../enums/deadline-status.enum";
-import {AssignmentService} from "../../services/assignment.service";
+import {Assignment} from "src/app/shared/models/assignment.model";
+import {AssignmentService} from "src/app/shared/services/assignment.service";
 import {ToastrService} from "ngx-toastr";
 import {ProgressbarConfig} from "ngx-bootstrap/progressbar";
-import {DrawerService} from "../../layouts/app-layout/subcomponents/drawer/drawer.service";
-import {TaskInfoComponent} from "../task-info/task-info.component";
+import {DrawerService} from "src/app/shared/layouts/app-layout/subcomponents/drawer/drawer.service";
+import {TaskInfoComponent} from "src/app/shared/components/task-info/task-info.component";
+import {AssignmentUtils} from "../../utils/assignment.utils";
 
 export function getProgressbarConfig(): ProgressbarConfig {
   return Object.assign(new ProgressbarConfig(), { animate: true, striped: true, max: 100, type: 'primary', value: 100 } as ProgressbarConfig);
@@ -23,6 +23,10 @@ export class TaskListComponent implements OnDestroy {
 
   requestsInProgress: string[] = [];
 
+  get assignmentUtil(): AssignmentUtils {
+    return AssignmentUtils;
+  }
+
   constructor(private assignmentService: AssignmentService,
               private toastr: ToastrService,
               private drawerService: DrawerService) {
@@ -30,78 +34,6 @@ export class TaskListComponent implements OnDestroy {
 
   onTaskCreated(task: Assignment): void {
     this.items.unshift(task);
-  }
-
-  deadlineLabel(task: Assignment): string {
-    const deadlineStatus = this.getDeadlineStatus(task);
-    if (deadlineStatus === DeadlineStatusEnum.None) {
-      return '';
-    }
-
-    const deadline = this.parseDeadlineDate(task.deadline!);
-    switch (deadlineStatus) {
-      case DeadlineStatusEnum.Overdue:
-        return `Atrasada, ${deadline.toLocaleDateString()}`;
-      case DeadlineStatusEnum.Today:
-        return `Hoje, ${deadline.toLocaleDateString()}`;
-      case DeadlineStatusEnum.Tomorrow:
-        return `Amanhã, ${deadline.toLocaleDateString()}`;
-      case DeadlineStatusEnum.Future:
-      default:
-        return `Concluir, ${deadline.toLocaleDateString()}`;
-    }
-  }
-
-  deadlineLabelClass(task: Assignment): string {
-    const deadlineStatus = this.getDeadlineStatus(task);
-    switch (deadlineStatus) {
-      case DeadlineStatusEnum.Overdue:
-        return `deadline-overdue`;
-      case DeadlineStatusEnum.Today:
-        return `deadline-today`;
-      case DeadlineStatusEnum.Tomorrow:
-      case DeadlineStatusEnum.Future:
-      default:
-        return '';
-    }
-  }
-
-  private getDeadlineStatus(task: Assignment): DeadlineStatusEnum {
-    if (!task.deadline) {
-      return DeadlineStatusEnum.None;
-    }
-
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-
-    const tomorrow = new Date(now);
-    tomorrow.setDate(now.getDate() + 1);
-
-    const deadline = this.parseDeadlineDate(task.deadline);
-    deadline.setHours(0, 0, 0, 0);
-
-    const diffToTomorrow = tomorrow.valueOf() - now.valueOf();
-
-    const duration = deadline.valueOf() - now.valueOf();
-    if (duration < 0) {
-      return DeadlineStatusEnum.Overdue;
-    }
-
-    if (duration === 0) {
-      return DeadlineStatusEnum.Today;
-    }
-
-    if (duration === diffToTomorrow) {
-      return DeadlineStatusEnum.Tomorrow;
-    }
-
-    return DeadlineStatusEnum.Future;
-  }
-
-  private parseDeadlineDate(deadline: string): Date {
-    const date = new Date(deadline);
-    const utcTime = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
-    return new Date(utcTime);
   }
 
   onCheckboxChange(task: Assignment): void {
@@ -187,4 +119,6 @@ export class TaskListComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.drawerService.close();
   }
+
+  protected readonly AssignmentUtils = AssignmentUtils;
 }

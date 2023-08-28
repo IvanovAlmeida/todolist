@@ -12,9 +12,9 @@
            (click)="hasRequestInProgress(item) ? null : onEdit(item)">
 
         {{item.description}}
-        <span *ngIf="item.deadline" class="deadline-label" [ngClass]="deadlineLabelClass(item)">
+        <span *ngIf="item.deadline" class="deadline-label" [ngClass]="AssignmentUtils.deadlineLabelClass(item)">
 
-        <i class="bi bi-calendar3 me-1"></i> {{ deadlineLabel(item) }}
+        <i class="bi bi-calendar3 me-1"></i> {{ AssignmentUtils.deadlineStatusText(item) }}
       </span>
       </div>
       <div class="flex-shrink-1 py-2 pb-0">
@@ -37,12 +37,6 @@
     </button>
     <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
         role="menu" aria-labelledby="button-basic">
-<!--      <li role="menuitem">
-        <a class="dropdown-item" (click)="concludeTask(task)">
-          <i class="bi bi-check-circle me-2"></i>
-          Concluir
-        </a>
-      </li>-->
       <li role="menuitem">
         <a class="dropdown-item" (click)="onEdit(task)">
           <i class="bi bi-pencil-fill me-2"></i>

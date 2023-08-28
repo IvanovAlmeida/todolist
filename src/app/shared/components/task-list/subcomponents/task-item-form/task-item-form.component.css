@@ -1,9 +1,19 @@
+.form-check-input {
+  border-radius: 10px;
+}
+
+.form-check-input:checked {
+  border-color: #25294C;
+  background-color: #25294C;
+}
+
 .task-item.task-form .input-name,
 .task-item.task-form .input-name:active,
 .task-item.task-form .input-name:focus,
 .task-item.task-form .input-name:focus-visible {
   border: none !important;
   outline: none;
+  background-color: transparent;
 }
 
 .task-item.task-form .input-deadline {

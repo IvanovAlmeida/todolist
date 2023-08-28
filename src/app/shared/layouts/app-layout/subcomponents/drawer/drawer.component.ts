@@ -1,4 +1,4 @@
-import {Component, ComponentRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {DrawerOptions, DrawerService, DrawerState} from "./drawer.service";
 import {Subscription} from "rxjs";
 import {DrawerDirective} from "../../../../directives/drawer.directive";

@@ -54,10 +54,6 @@ export class TasksComponent implements OnInit {
       })
   }
 
-  onButtonClick(): void {
-    console.log('Button novo has clicked')
-  }
-
   hasMorePages(): boolean {
     return this.pagedResult.page < this.pagedResult.pageCount;
   }

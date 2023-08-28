@@ -1,0 +1,55 @@
+.drawer-close:hover {
+  cursor: pointer;
+}
+
+.close-button,
+.delete-button,
+.created-text {
+  color: #25294C !important;
+}
+
+
+.close-button:hover,
+.delete-button:hover {
+  background-color: inherit;
+  color: inherit;
+}
+
+.box-input {
+  border-radius: 5px !important;
+}
+
+.task-form .input-name,
+.task-form .input-name:active,
+.task-form .input-name:focus,
+.task-form .input-name:focus-visible {
+  border: none !important;
+  outline: none;
+  background-color: transparent;
+}
+
+.form-check-input {
+  border-radius: 10px;
+}
+
+.form-check-input:checked {
+  border-color: #25294C;
+  background-color: #25294C;
+}
+
+.task-form .input-deadline {
+  width: 0;
+  height: 0;
+  padding: 0;
+  border: 0;
+}
+
+::ng-deep .theme-green .bs-datepicker-head,
+::ng-deep .theme-green button {
+  background-color: #202342 !important;
+  border-color: #202342 !important;
+}
+
+::ng-deep .theme-green .week span {
+  color: #202342 !important;
+}
