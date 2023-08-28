@@ -10,23 +10,26 @@
       <div class="flex-shrink-1">
         <input class="form-check-input" type="checkbox" [checked]="task.concluded">
       </div>
-      <input type="text" class="flex-grow-1 input-name ms-2" [value]="task.description" />
+      <input type="text" class="flex-grow-1 input-name ms-3" [value]="task.description" />
     </div>
 
     <div class="mt-2 px-2 py-3 bg-white box-input d-flex justify-content-start align-items-center deadline">
       <input type="text" placement="left"
-             class="form-control input-deadline" #dp="bsDatepicker"
+             class="form-control input-deadline flex-shrink-1" #dp="bsDatepicker"
              bsDatepicker [(bsValue)]="deadline" [bsConfig]="datePickerConfig"
              (bsValueChange)="onDeadlineChange()" (change)="onDeadlineChange()">
 
-      <button class="btn btn-sm p-0 py-1 border-0 me-2"
+      <button class="btn btn-sm p-0 py-1 border-0 me-3"
               (click)="dp.toggle()"
               type="button">
         <i class="bi bi-calendar3"></i>
       </button>
 
-      <div *ngIf="deadline" class="d-flex justify-content-between">
-        {{ AssignmentUtils.deadlineStatusText(this.task) }}
+      <div *ngIf="deadline" class="d-flex justify-content-between flex-grow-1">
+        <span (click)="dp.toggle()">
+          {{ AssignmentUtils.deadlineStatusText(this.task) }}
+        </span>
+
         <button class="btn btn-sm p-0 py-0 border-0 me-2" (click)="dp.bsValue = undefined">
           <i class="bi bi-x fs-6"></i>
         </button>
