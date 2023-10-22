@@ -80,7 +80,12 @@ export class TaskListComponent implements OnDestroy {
   }
 
   onEdit(data: Assignment): void {
-    this.drawerService.open(TaskInfoComponent, data);
+    this.drawerService.open(TaskInfoComponent, {
+      data: data,
+      onDelete: () => {
+        this.items = this.items.filter(x => x.id !== data.id);
+      }
+    });
   }
 
   onDelete(task: Assignment): void {

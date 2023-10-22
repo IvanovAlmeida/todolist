@@ -1,5 +1,6 @@
 import {Assignment} from "../models/assignment.model";
 import {DeadlineStatusEnum} from "../enums/deadline-status.enum";
+import {DateUtils} from "./date.utils";
 
 export class AssignmentUtils {
   static deadlineStatusText(task: Assignment): string {
@@ -8,7 +9,7 @@ export class AssignmentUtils {
       return '';
     }
 
-    const deadline = this.parseDeadlineDate(task.deadline!);
+    const deadline = DateUtils.parseToDate(task.deadline!);
     switch (deadlineStatus) {
       case DeadlineStatusEnum.Overdue:
         return `Atrasada, ${deadline.toLocaleDateString()}`;
@@ -33,7 +34,7 @@ export class AssignmentUtils {
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
 
-    const deadline = this.parseDeadlineDate(task.deadline);
+    const deadline = DateUtils.parseToDate(task.deadline);
     deadline.setHours(0, 0, 0, 0);
 
     const diffToTomorrow = tomorrow.valueOf() - now.valueOf();
@@ -54,6 +55,12 @@ export class AssignmentUtils {
     return DeadlineStatusEnum.Future;
   }
 
+  static createdStatusText(task: Assignment): string {
+    const created = DateUtils.parseToDate(task.createdAt);
+
+    return `Criado em ${created.toLocaleDateString()}`;
+  }
+
   static deadlineLabelClass(task: Assignment): string {
     const deadlineStatus = this.deadlineStatus(task);
     switch (deadlineStatus) {
@@ -66,11 +73,5 @@ export class AssignmentUtils {
       default:
         return '';
     }
-  }
-
-  static parseDeadlineDate(deadline: string): Date {
-    const date = new Date(deadline);
-    const utcTime = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
-    return new Date(utcTime);
   }
 }

@@ -8,16 +8,16 @@
 
     <div class="mt-1 px-2 py-3 bg-white box-input d-flex align-items-center">
       <div class="flex-shrink-1">
-        <input class="form-check-input" type="checkbox" [checked]="task.concluded">
+        <input class="form-check-input" type="checkbox" [checked]="task.concluded" [disabled]="editing">
       </div>
-      <input type="text" class="flex-grow-1 input-name ms-3" [value]="task.description" />
+      <input type="text" class="flex-grow-1 input-name ms-3" #inputDesc [value]="task.description" [disabled]="editing" />
     </div>
 
     <div class="mt-2 px-2 py-3 bg-white box-input d-flex justify-content-start align-items-center deadline">
       <input type="text" placement="left"
              class="form-control input-deadline flex-shrink-1" #dp="bsDatepicker"
              bsDatepicker [(bsValue)]="deadline" [bsConfig]="datePickerConfig"
-             (bsValueChange)="onDeadlineChange()" (change)="onDeadlineChange()">
+             (bsValueChange)="loaded ? onDeadlineChange() : null" [isDisabled]="editing">
 
       <button class="btn btn-sm p-0 py-1 border-0 me-3"
               (click)="dp.toggle()"
@@ -42,14 +42,18 @@
     </div>
   </form>
 
+  <div class="bg-primary mt-1" *ngIf="editing">
+    <progressbar class="progress-striped active" style="height: .7vh"></progressbar>
+  </div>
+
   <div class="flex-shrink-1 border-top pt-2 d-flex align-items-center">
-    <button type="button" class="flex-shrink-1 btn btn-outline-dark border-0 close-button ps-0">
+    <button type="button" class="flex-shrink-1 btn btn-outline-dark border-0 close-button ps-0" (click)="close()">
       <i class="bi bi-layout-sidebar-reverse"></i>
     </button>
     <div class="flex-grow-1 text-center created-text">
-      Criada Hoje
+      {{ AssignmentUtils.createdStatusText(task) }}
     </div>
-    <button type="button" class="flex-shrink-1 btn btn-outline-dark border-0 delete-button pe-0">
+    <button type="button" class="flex-shrink-1 btn btn-outline-dark border-0 delete-button pe-0" (click)="delete()">
       <i class="bi bi-trash"></i>
     </button>
   </div>

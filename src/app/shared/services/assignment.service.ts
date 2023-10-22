@@ -24,6 +24,11 @@ export class AssignmentService extends BaseService {
     return this.httpClient.post<Assignment>(url, task);
   }
 
+  editTask(id: string, task: Assignment): Observable<Assignment> {
+    const url = `${this.apiUrl}/Assignments/${id}`;
+    return this.httpClient.put<Assignment>(url, task);
+  }
+
   conclude(id: string): Observable<void> {
     const url = `${this.apiUrl}/Assignments/${id}/conclude`;
     return this.httpClient.patch<void>(url, {});

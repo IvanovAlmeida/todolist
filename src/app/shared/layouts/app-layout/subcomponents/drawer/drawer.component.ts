@@ -1,7 +1,7 @@
-import {Component, ComponentRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {DrawerOptions, DrawerService, DrawerState} from "./drawer.service";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {DrawerOptions, DrawerService} from "./drawer.service";
 import {Subscription} from "rxjs";
-import {DrawerDirective} from "../../../../directives/drawer.directive";
+import {DrawerDirective} from "src/app/shared/directives/drawer.directive";
 
 @Component({
   selector: 'drawer',
@@ -12,14 +12,6 @@ export class DrawerComponent implements OnInit, OnDestroy {
   private _subscriptions: Subscription[] = [];
 
   @ViewChild(DrawerDirective, {static: true}) drawerHost!: DrawerDirective;
-
-  get state(): DrawerState {
-    return this.drawerService.state;
-  }
-
-  get isOpen(): boolean {
-    return this.state === DrawerState.Open;
-  }
 
   constructor(private drawerService: DrawerService) { }
 
@@ -48,12 +40,14 @@ export class DrawerComponent implements OnInit, OnDestroy {
     viewRef.clear();
 
     const componentRef = viewRef.createComponent<any>(options.component);
-    componentRef.instance.data = options.data;
+
+    Object.keys(options.data).forEach((value, idx) => {
+      componentRef.instance[value] = options.data[value];
+    });
   }
 
   closeDrawer(): void {
-    const viewRef = this.drawerHost.viewContainerRef;
-    viewRef.clear();
+    this.drawerHost.viewContainerRef.clear();
   }
 
   ngOnDestroy(): void {

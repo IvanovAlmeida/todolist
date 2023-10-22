@@ -47,7 +47,9 @@ export class TaskItemFormComponent {
 
           this.loading = false;
           this.taskCreatedEmitter.emit(task);
-          this.toastr.success("Task cadastrada com sucesso!")
+          this.toastr.success("Task cadastrada com sucesso!");
+
+          this.deadline = undefined;
         },
         error: err => {
           this.loading = false;
